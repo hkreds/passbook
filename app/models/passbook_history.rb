@@ -1,0 +1,2 @@
+class PassbookHistory < ApplicationRecord
+end

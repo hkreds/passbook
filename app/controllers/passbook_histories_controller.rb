@@ -1,0 +1,2 @@
+class PassbookHistoriesController < ApplicationController
+end
