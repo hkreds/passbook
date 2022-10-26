@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_26_024358) do
+ActiveRecord::Schema.define(version: 2022_10_26_063809) do
 
   create_table "bank_passbooks", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "account_number"
+    t.string "account_number"
     t.integer "balance", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2022_10_26_024358) do
     t.integer "amount_of_money"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "bank_passbook_id"
   end
 
   create_table "users", force: :cascade do |t|
