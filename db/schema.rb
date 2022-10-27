@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_26_063809) do
+ActiveRecord::Schema.define(version: 2022_10_26_071327) do
 
   create_table "bank_passbooks", force: :cascade do |t|
     t.integer "user_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2022_10_26_063809) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "bank_passbook_id"
+    t.boolean "operation_status"
   end
 
   create_table "users", force: :cascade do |t|

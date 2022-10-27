@@ -1,2 +1,57 @@
-<h1>BankPassbooks#show</h1>
-<p>Find me in app/views/bank_passbooks/show.html.erb</p>
+<h3 class="mb-3">
+  口座番号：<%= @bank_passbook.account_number %>の情報
+</h3>
+<div class="ml-3">
+  <p>口座名義人：<%= @bank_passbook.user.name %></p>
+  <p>口座残高：<%= @bank_passbook.balance %>円</p>
+</div>
+<div>
+  <div>入出金の登録</div>
+  <%= form_with model: [@bank_passbook,@passbook_history] do |f| %>
+    <%= render 'layouts/errors', obj: @passbook_history %>
+    <table>
+      <tr>
+        <th colspan="2">
+          <%= f.radio_button :operation_status, :true %>
+          <%= f.label :operation_status, "入金", {value: :true, style: "display: inline-block;"} %>
+          <%= f.radio_button :operation_status, :false %>
+          <%= f.label :operation_status, "出金", {value: :false, style: "display: inline-block;"} %>
+        </th>
+      </tr>
+      <tr>
+        <th>金額</th>
+        <th><%= f.text_field :amount_of_money, :size=>"32" %></th>
+      </tr>
+      <tr>
+        <th>摘要</th>
+        <th><%= f.text_field :summary, placeholder:"必要であれば入力(30文字まで)", :size=>"32" %></th>
+      </tr>
+      <tr>
+        <th><%= f.hidden_field :bank_passbook_id, :value => @bank_passbook.id %></th>
+        <th><%= f.submit "登録する", class: "btn btn-primary" %></th>
+      </tr>
+    </table>
+  <% end %>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>取引日</th>
+      <th>摘要</th>
+      <th>出金額</th>
+      <th>入金額</th>
+      <th>差引残高</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @passbook_histories.each do |passbook_history| %>
+      <tr>
+        <td><%= passbook_history.created_at %></td>
+        <td><%= passbook_history.summary %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,23 +1,22 @@
 <h3><%= @user.name %>さんのページ</h3>
 <div>口座番号の登録</div>
-</table>
-  <div>
-    <%= form_with model: @bank_passbook do |f| %>
-      <table>
-        <tr>
-          <th>口座番号</th>
-          <th><%= f.text_field :account_number, placeholder:"7桁で入力、6桁の場合は頭に0を入力", :size=>"32" %></th>
-        </tr>
-        <tr>
-          <th>入金額</th>
-          <th><%= f.text_field :balance, value:0, :size=>"32" %></th>
-        </tr>
-        <tr>
-          <th><%= f.hidden_field :user_id, :value => @user.id %></th>
-          <th><%= f.submit "登録する", class: "btn btn-primary" %></th>
-        </tr>
-    <% end %>
-  </div>
+<div>
+  <%= form_with model: @bank_passbook do |f| %>
+    <%= render 'layouts/errors', obj: @bank_passbook %>
+    <table>
+      <tr>
+        <th>口座番号</th>
+        <th><%= f.text_field :account_number, placeholder:"7桁で入力、6桁の場合は頭に0を入力", :size=>"32" %></th>
+      </tr>
+      <tr>
+        <th>入金額</th>
+        <th><%= f.text_field :balance, value:0, :size=>"32" %></th>
+      </tr>
+      <tr>
+        <th><%= f.hidden_field :user_id, :value => @user.id %></th>
+        <th><%= f.submit "登録する", class: "btn btn-primary" %></th>
+      </tr>
+  <% end %>
 </div>
 <table>
   <thead>
@@ -31,7 +30,7 @@
       <tr>
         <td><%= bank_passbook.account_number %></td>
         <td><%= bank_passbook.balance %></td>
-        <td><%= link_to "履歴を見る", bank_passbook_path(bank_passbook), class: "btn btn-success" %></td>
+        <td><%= link_to "口座詳細", bank_passbook_path(bank_passbook), class: "btn btn-success" %></td>
         <td><%= link_to "口座の削除", bank_passbook_path(bank_passbook), method: :delete, class: "btn btn-danger" %></td>
       </tr>
     <% end %>

@@ -13,10 +13,13 @@ class BankPassbooksController < ApplicationController
   def destroy
     @bank_passbook = BankPassbook.find(params[:id])
     @bank_passbook.destroy
-    redirect_to request.referer
+    redirect_to user_path(current_user)
   end
 
   def show
+    @bank_passbook  = BankPassbook.find(params[:id])
+    @passbook_histories = @bank_passbook.passbook_histories
+    @passbook_history = PassbookHistory.new
   end
 
   private
