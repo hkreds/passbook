@@ -2,6 +2,7 @@ class BankPassbooksController < ApplicationController
   def create
     @bank_passbook = BankPassbook.new(bank_passbook_params)
     if @bank_passbook.save
+      @passbook_history = PassbookHistory.create(amount_of_money: @bank_passbook.balance,summary: "口座登録",operation_status: true,bank_passbook_id: @bank_passbook.id,balance: @bank_passbook.balance)
       redirect_to user_path(current_user)
     else
       @user = current_user
