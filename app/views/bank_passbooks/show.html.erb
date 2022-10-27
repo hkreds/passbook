@@ -27,7 +27,9 @@
         <th><%= f.text_field :summary, placeholder:"必要であれば入力(30文字まで)", :size=>"32" %></th>
       </tr>
       <tr>
-        <th><%= f.hidden_field :bank_passbook_id, :value => @bank_passbook.id %></th>
+        <th>
+          <%= f.hidden_field :bank_passbook_id, :value => @bank_passbook.id %>
+        </th>
         <th><%= f.submit "登録する", class: "btn btn-primary" %></th>
       </tr>
     </table>
@@ -46,11 +48,16 @@
   <tbody>
     <% @passbook_histories.each do |passbook_history| %>
       <tr>
-        <td><%= passbook_history.created_at %></td>
+        <td><%= passbook_history.created_at.strftime("%Y年%m月%d日") %></td>
         <td><%= passbook_history.summary %></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <% if passbook_history.operation_status == true %>
+          <td><%= passbook_history.amount_of_money %></td>
+          <td></td>
+        <% elsif passbook_history.operation_status == false %>
+          <td></td>
+          <td><%= passbook_history.amount_of_money %></td>
+        <% end %>
+        <td><%= passbook_history.balance %></td>
       </tr>
     <% end %>
   </tbody>

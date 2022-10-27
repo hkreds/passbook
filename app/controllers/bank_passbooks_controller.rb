@@ -18,8 +18,8 @@ class BankPassbooksController < ApplicationController
 
   def show
     @bank_passbook  = BankPassbook.find(params[:id])
-    @passbook_histories = @bank_passbook.passbook_histories
     @passbook_history = PassbookHistory.new
+    @passbook_histories = @bank_passbook.passbook_histories
   end
 
   private
