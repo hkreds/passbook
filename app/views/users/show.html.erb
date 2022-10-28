@@ -1,4 +1,6 @@
 <h3><%= @user.name %>さんのページ</h3>
+<h5>口座数：<%= @user.bank_passbooks.count %></h5>
+<h5>残高合計：<%= @user_all_balance.to_s(:delimited) %>円</h5>
 <div>口座番号の登録</div>
 <div>
   <%= form_with model: @bank_passbook do |f| %>
@@ -29,9 +31,9 @@
     <% @bank_passbooks.each do |bank_passbook| %>
       <tr>
         <td><%= bank_passbook.account_number %></td>
-        <td><%= bank_passbook.balance %></td>
+        <td><%= bank_passbook.balance.to_s(:delimited) %>円</td>
         <td><%= link_to "口座詳細", bank_passbook_path(bank_passbook), class: "btn btn-success" %></td>
-        <td><%= link_to "口座の削除", bank_passbook_path(bank_passbook), method: :delete, class: "btn btn-danger" %></td>
+        <td><%= link_to "口座の削除", bank_passbook_path(bank_passbook), method: :delete, data:{ confirm: '本当に削除しますか?' }, class: "btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>

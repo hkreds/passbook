@@ -3,7 +3,7 @@
 </h3>
 <div class="ml-3">
   <p>口座名義人：<%= @bank_passbook.user.name %></p>
-  <p>口座残高：<%= @bank_passbook.balance %>円</p>
+  <p>口座残高：<%= @bank_passbook.balance.to_s(:delimited) %>円</p>
 </div>
 <div>
   <div>入出金の登録</div>
@@ -51,13 +51,13 @@
         <td><%= passbook_history.created_at.strftime("%Y年%m月%d日") %></td>
         <td><%= passbook_history.summary %></td>
         <% if passbook_history.operation_status == true %>
-          <td><%= passbook_history.amount_of_money %></td>
+          <td><%= passbook_history.amount_of_money.to_s(:delimited) %>円</td>
           <td></td>
         <% elsif passbook_history.operation_status == false %>
           <td></td>
-          <td><%= passbook_history.amount_of_money %></td>
+          <td><%= passbook_history.amount_of_money.to_s(:delimited) %>円</td>
         <% end %>
-        <td><%= passbook_history.balance %></td>
+        <td><%= passbook_history.balance.to_s(:delimited) %>円</td>
       </tr>
     <% end %>
   </tbody>
